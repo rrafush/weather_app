@@ -35,9 +35,6 @@ Inside `models` you can find the classes created to best represent data from the
 
 `Modules`are the pages inside the app and since it is a unique page application, we only have the search module. Inside it we have the `repository`, responsible for fetching data from the API.
 
-
-```
-
 ## Packages used in this project
 
 
