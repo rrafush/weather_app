@@ -1,4 +1,4 @@
-# Weather Today: A weather app build with mobX and the MetaWeather API
+# Weather Today: A weather app built with mobX and the MetaWeather API
 
 This project is my first one build in flutter, and I was inspired by the Flutter Modular architecture to structure the folders:
 
@@ -12,11 +12,11 @@ You can install this app on your android phone downloading the apk file `weather
 
 ## App Overview
 
-The application is pretty simple, it is an one page application with a **search bar** and it has mainly three states: the first screen when the user is not searching anything, the main screen that shows the user data fetched from the API, and an error screen in case something wrong happens.
+The application is pretty simple, it is a one page application with a **search bar** and it has mainly three states: the first screen when the user is not searching anything, the main screen that shows the user data fetched from the API, and an error screen in case something wrong happens.
 
 ## App Structure
 
-This app was made as an extension of the terminal app built in the Dart complete course from Andrea Bizzotto on Udemy, but as I transformed it into a flutter app, I felt the necessity of a project architecture. For that reason I chose to sctucture my project based on the Flutter Modular architecture, because I find it to be easy to understand and also scalable.
+This app was made as an extension of the terminal app built in the Dart complete course from Andrea Bizzotto on Udemy, but as I transformed it into a flutter app, I felt the need of a project architecture. For that reason I chose to sctucture my project based on the Flutter Modular architecture, because I find it easy to understand and also scalable.
 
 The project folders are structured like this:
 
