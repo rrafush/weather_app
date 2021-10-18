@@ -8,7 +8,7 @@ The project uses the [MetaWeather API](https://www.metaweather.com/api/) to fetc
 
 ### Installing the project
 
-You can install this app on your android phone downloading the apk file [weather_today.apk] in this repository.
+You can install this app on your android phone downloading the apk file `weather-today.apk` in this repository.
 
 ## App Overview
 
