@@ -45,7 +45,7 @@ Inside `models` you can find the classes created to best represent data from the
 
 ## Credits
 
-This project was made inspired by the app build on the Dart complete course by [Andrea Bizzotto](https://github.com/bizz84).
+This project was made inspired by the app built on the Dart complete course by [Andrea Bizzotto](https://github.com/bizz84).
 I have to thank the girls from Flutter Girls who always support and help me in every issue I bump into, you are the best!
 
 ## [LICENSE: MIT](LICENSE.md)
