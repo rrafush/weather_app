@@ -96,44 +96,52 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ],
                 ),
-                if (controller.response == null &&
-                    !controller.isSearching &&
-                    controller.error == null)
-                  SearchHome(),
-                if (controller.isSearching)
-                  Container(
-                    height: MediaQuery.of(context).size.height - 150,
-                    width: MediaQuery.of(context).size.width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                            width: 50,
-                            height: 50,
-                            child: CircularProgressIndicator(
-                              color: AppColors.white,
-                            )),
-                      ],
-                    ),
-                  ),
-                if (controller.response != null)
-                  ResultPage(
-                    city: controller.response!.city.replaceAll('£', ''),
-                    country: controller.response!.country,
-                    currentTemp:
-                        controller.response!.currentTemp.toStringAsFixed(0),
-                    maxTemp: controller.response!.maxTemp.toStringAsFixed(0),
-                    minTemp: controller.response!.minTemp.toStringAsFixed(0),
-                    weatherState: controller.response!.weatherState,
-                    imageAsset: controller.imageAsset!,
-                    week: controller.response!.alldays,
-                    onClear: () {
-                      textController.clear();
-                      controller.clearSearch();
-                    },
-                  ),
-                if (controller.error != null)
-                  ErrorPage(error: controller.error!),
+                AnimatedSwitcher(
+                  duration: Duration(milliseconds: 300),
+                  child: controller.response == null &&
+                          !controller.isSearching &&
+                          controller.error == null
+                      ? SearchHome()
+                      : controller.isSearching
+                          ? Container(
+                              height: MediaQuery.of(context).size.height - 150,
+                              width: MediaQuery.of(context).size.width,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                      width: 50,
+                                      height: 50,
+                                      child: CircularProgressIndicator(
+                                        color: AppColors.white,
+                                      )),
+                                ],
+                              ),
+                            )
+                          : controller.response != null
+                              ? ResultPage(
+                                  city: controller.response!.city
+                                      .replaceAll('£', ''),
+                                  country: controller.response!.country,
+                                  currentTemp: controller.response!.currentTemp
+                                      .toStringAsFixed(0),
+                                  maxTemp: controller.response!.maxTemp
+                                      .toStringAsFixed(0),
+                                  minTemp: controller.response!.minTemp
+                                      .toStringAsFixed(0),
+                                  weatherState:
+                                      controller.response!.weatherState,
+                                  imageAsset: controller.imageAsset!,
+                                  week: controller.response!.alldays,
+                                  onClear: () {
+                                    textController.clear();
+                                    controller.clearSearch();
+                                  },
+                                )
+                              : controller.error != null
+                                  ? ErrorPage(error: controller.error!)
+                                  : SizedBox(),
+                ),
               ],
             ),
           ),
