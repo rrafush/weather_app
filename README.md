@@ -1,6 +1,6 @@
-# Weather Today: A weather app built with mobX and the MetaWeather API
+# Weather Today: A weather app built in Flutter with mobX and the MetaWeather API
 
-This project is my first one build in flutter, and I was inspired by the Flutter Modular architecture to structure the folders:
+This project is my first one built in flutter, and I was inspired by the Flutter Modular architecture to structure the folders:
 
 ![Weather Today app preview](media/app-screenshots.png)
 
