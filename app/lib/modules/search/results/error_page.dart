@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:weather_app/theme/app_colors.dart';
 
 class ErrorPage extends StatelessWidget {
@@ -11,7 +12,8 @@ class ErrorPage extends StatelessWidget {
     return Column(
       children: [
         SizedBox(height: 60),
-        Image(image: AssetImage('assets/error.png')),
+        Lottie.asset('assets/error-animation.json'),
+        //Image(image: AssetImage('assets/error.png')),
         Padding(
           padding: const EdgeInsets.all(30),
           child: Container(
