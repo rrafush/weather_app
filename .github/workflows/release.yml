@@ -1,0 +1,37 @@
+name: release
+on: push
+jobs:
+  build:
+    name: Build APK
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+      
+    - name: Extract branch name
+      shell: bash
+      run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+      id: extract_branch
+      
+    - uses: actions/setup-java@v1
+      with:
+        java-version: '12.x'
+
+    - uses: subosito/flutter-action@v1
+      with:
+        flutter-version: '2.5.3'
+    - run: flutter pub get
+      working-directory: ./app
+    # - run: flutter pub run flutter_launcher_icons:main
+    # - run: flutter test
+    - run: flutter build apk --release
+      working-directory: ./app
+    - name: Create a Release APK
+      uses: ncipollo/release-action@v1
+      with:
+        artifacts: "app/build/app/outputs/apk/*/*.apk"
+        name: Automatic build ${{ github.sha }} for branch ${{ steps.extract_branch.outputs.branch }}
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit: ${{ steps.extract_branch.outputs.branch }}
+        tag: commit-${{ github.sha }}
+        draft: true
+        prerelease: true
