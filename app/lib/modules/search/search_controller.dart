@@ -5,6 +5,12 @@ import '../../models/weather_model.dart';
 
 part 'search_controller.g.dart';
 
+enum PageView {
+  Home,
+  Weather,
+  Error,
+}
+
 class SearchController = _SearchController with _$SearchController;
 
 abstract class _SearchController with Store {
@@ -17,10 +23,25 @@ abstract class _SearchController with Store {
   String? error;
 
   @observable
+  String? cityFormatted;
+
+  @observable
+  String? currentTempFormatted;
+
+  @observable
+  String? maxTempFormatted;
+
+  @observable
+  String? minTempFormatted;
+
+  @observable
   bool isSearching = false;
 
   @observable
   String? imageAsset;
+
+  @observable
+  PageView? pageView;
 
   @action
   Future<Weather> getWeather(String city) async {
@@ -30,14 +51,31 @@ abstract class _SearchController with Store {
       final weather = await apiClient.fetchWeather(locationId);
       response = weather;
       imageAsset = getAsset(weather);
+      cityFormatted = response!.city.replaceAll('£', '');
+      currentTempFormatted = response!.currentTemp.toStringAsFixed(0);
+      minTempFormatted = response!.minTemp.toStringAsFixed(0);
+      maxTempFormatted = response!.maxTemp.toStringAsFixed(0);
       isSearching = false;
       error = null;
+      getPageView();
       return weather;
     } catch (e) {
       error = e.toString();
       response = null;
       isSearching = false;
+      getPageView();
       throw e;
+    }
+  }
+
+  @action
+  PageView getPageView() {
+    if (response == null && !isSearching && error == null) {
+      return pageView = PageView.Home;
+    } else if (response != null && error == null) {
+      return pageView = PageView.Weather;
+    } else {
+      return pageView = PageView.Error;
     }
   }
 

@@ -120,15 +120,11 @@ class _SearchPageState extends State<SearchPage> {
                             )
                           : controller.response != null
                               ? ResultPage(
-                                  city: controller.response!.city
-                                      .replaceAll('£', ''),
+                                  city: controller.cityFormatted!,
                                   country: controller.response!.country,
-                                  currentTemp: controller.response!.currentTemp
-                                      .toStringAsFixed(0),
-                                  maxTemp: controller.response!.maxTemp
-                                      .toStringAsFixed(0),
-                                  minTemp: controller.response!.minTemp
-                                      .toStringAsFixed(0),
+                                  currentTemp: controller.currentTempFormatted!,
+                                  maxTemp: controller.maxTempFormatted!,
+                                  minTemp: controller.minTempFormatted!,
                                   weatherState:
                                       controller.response!.weatherState,
                                   imageAsset: controller.imageAsset!,
