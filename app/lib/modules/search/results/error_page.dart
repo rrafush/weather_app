@@ -13,10 +13,9 @@ class ErrorPage extends StatelessWidget {
       children: [
         SizedBox(height: 60),
         Lottie.asset('assets/error-animation.json'),
-        //Image(image: AssetImage('assets/error.png')),
         Padding(
           padding: const EdgeInsets.all(30),
-          child: Container(
+          child:  Container(
             decoration: BoxDecoration(
               color: AppColors.white.withOpacity(0.15),
               borderRadius: BorderRadius.circular(20),
