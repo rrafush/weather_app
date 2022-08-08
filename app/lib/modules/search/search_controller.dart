@@ -5,7 +5,6 @@ import '../../models/weather_model.dart';
 
 part 'search_controller.g.dart';
 
-
 class SearchController = _SearchController with _$SearchController;
 
 abstract class _SearchController with Store {
@@ -38,15 +37,13 @@ abstract class _SearchController with Store {
   @action
   Future<Weather> getWeather(String city) async {
     isSearching = true;
+    error = null;
     try {
       final locationId = await apiClient.getLocationId(city);
       final weather = await apiClient.fetchWeather(locationId);
       response = weather;
       imageAsset = getAsset(weather);
-      cityFormatted = response!.city.replaceAll('£', '');
-      currentTempFormatted = response!.currentTemp.toStringAsFixed(0);
-      minTempFormatted = response!.minTemp.toStringAsFixed(0);
-      maxTempFormatted = response!.maxTemp.toStringAsFixed(0);
+
       isSearching = false;
       error = null;
       return weather;
@@ -56,6 +53,14 @@ abstract class _SearchController with Store {
       isSearching = false;
       throw e;
     }
+  }
+
+  @action
+  void formatStrings(Weather weather) {
+    cityFormatted = weather.city.replaceAll('£', '');
+    currentTempFormatted = weather.currentTemp.toStringAsFixed(0);
+    minTempFormatted = weather.minTemp.toStringAsFixed(0);
+    maxTempFormatted = weather.maxTemp.toStringAsFixed(0);
   }
 
   @action
