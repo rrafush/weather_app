@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:weather_app/theme/app_colors.dart';
+import 'package:weather_app/presentation/theme/app_colors.dart';
 
 class ErrorPage extends StatelessWidget {
   const ErrorPage({Key? key, required this.error}) : super(key: key);

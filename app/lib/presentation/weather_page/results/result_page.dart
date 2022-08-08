@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/models/weather_model.dart';
-import 'package:weather_app/theme/app_colors.dart';
+import 'package:weather_app/data/model/next_days_response.dart';
+import 'package:weather_app/presentation/theme/app_colors.dart';
 
 class ResultPage extends StatelessWidget {
   const ResultPage({
@@ -23,7 +23,7 @@ class ResultPage extends StatelessWidget {
   final String minTemp;
   final String weatherState;
   final String imageAsset;
-  final List<NextDays> week;
+  final List<NextDaysResponse> week;
   final VoidCallback onClear;
 
   @override

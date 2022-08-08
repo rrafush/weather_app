@@ -1,7 +1,7 @@
 import 'package:mobx/mobx.dart';
-import 'package:weather_app/modules/search/repositories/weather_api_client.dart';
-
-import '../../models/weather_model.dart';
+import 'package:weather_app/data/model/weather_response.dart';
+import 'package:weather_app/data/weather_service.dart';
+import 'package:weather_app/domain/weather.dart';
 
 part 'search_controller.g.dart';
 
@@ -11,7 +11,7 @@ abstract class _SearchController with Store {
   WeatherApiClient apiClient = WeatherApiClient();
 
   @observable
-  Weather? response;
+  WeatherResponse? response;
 
   @observable
   String? error;
@@ -35,7 +35,7 @@ abstract class _SearchController with Store {
   String? imageAsset;
 
   @action
-  Future<Weather> getWeather(String city) async {
+  Future<WeatherResponse> getWeather(String city) async {
     isSearching = true;
     error = null;
     try {
@@ -64,7 +64,7 @@ abstract class _SearchController with Store {
   }
 
   @action
-  String getAsset(Weather weather) {
+  String getAsset(WeatherResponse weather) {
     final String asset;
 
     switch (weather.weatherState) {

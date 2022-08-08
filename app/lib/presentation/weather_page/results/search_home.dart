@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/theme/app_colors.dart';
+import 'package:weather_app/presentation/theme/app_colors.dart';
 
 class SearchHome extends StatelessWidget {
   const SearchHome({Key? key}) : super(key: key);

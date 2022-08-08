@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:weather_app/modules/search/results/error_page.dart';
-import 'package:weather_app/modules/search/results/result_page.dart';
-import 'package:weather_app/modules/search/results/search_home.dart';
-import 'package:weather_app/modules/search/search_controller.dart';
-import 'package:weather_app/theme/app_colors.dart';
+import 'package:weather_app/presentation/search_controller.dart';
+import 'package:weather_app/presentation/theme/app_colors.dart';
+import 'package:weather_app/presentation/weather_page/results/error_page.dart';
+import 'package:weather_app/presentation/weather_page/results/result_page.dart';
+import 'package:weather_app/presentation/weather_page/results/search_home.dart';
 
 final controller = SearchController();
 
@@ -128,7 +128,7 @@ class _SearchPageState extends State<SearchPage> {
                                   weatherState:
                                       controller.response!.weatherState,
                                   imageAsset: controller.imageAsset!,
-                                  week: controller.response!.alldays,
+                                  week: controller.response!.allDays,
                                   onClear: () {
                                     textController.clear();
                                     controller.clearSearch();

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:weather_app/modules/search/search_page.dart';
-import 'package:weather_app/theme/app_themes.dart';
+import 'package:weather_app/presentation/theme/app_themes.dart';
+import 'package:weather_app/presentation/weather_page/search_page.dart';
 
 void main() {
   runApp(MyApp());

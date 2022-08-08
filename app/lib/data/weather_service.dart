@@ -1,8 +1,7 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-
-import '../../../models/weather_model.dart';
+import 'package:weather_app/data/model/weather_response.dart';
 
 class WeatherApiClient {
   static const baseUrl = 'https://www.metaweather.com/api';
@@ -22,7 +21,7 @@ class WeatherApiClient {
     return locationJson.first['woeid'] as int;
   }
 
-  Future<Weather> fetchWeather(int locationId) async {
+  Future<WeatherResponse> fetchWeather(int locationId) async {
     final weatherUrl = Uri.parse('$baseUrl/location/$locationId');
     final weatherResponse = await http.get(weatherUrl);
     if (weatherResponse.statusCode != 200) {
@@ -32,7 +31,7 @@ class WeatherApiClient {
     final weatherJson = jsonDecode(weatherResponse.body);
     final consolidatedWeather = weatherJson as Map<String, dynamic>;
 
-    final weather = Weather.fromJson(consolidatedWeather);
+    final weather = WeatherResponse.fromJson(consolidatedWeather);
     return weather;
   }
 }
