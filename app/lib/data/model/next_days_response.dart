@@ -1,3 +1,5 @@
+import 'package:weather_app/domain/next_days.dart';
+
 class NextDaysResponse {
   final String weatherState;
   final String date;
@@ -17,5 +19,12 @@ class NextDaysResponse {
         date: json['applicable_date'] as String,
         maxTemp: json['max_temp'] as double,
         minTemp: json['min_temp'] as double,
+      );
+
+  NextDays toDomain() => NextDays(
+        weatherState: weatherState,
+        date: date,
+        maxTemp: maxTemp,
+        minTemp: minTemp,
       );
 }

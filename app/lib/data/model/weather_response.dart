@@ -1,4 +1,5 @@
 import 'package:weather_app/data/model/next_days_response.dart';
+import 'package:weather_app/domain/weather.dart';
 
 class WeatherResponse {
   final String city;
@@ -37,4 +38,15 @@ class WeatherResponse {
           .toList(growable: false),
     );
   }
+
+  Weather toDomain() => Weather(
+        city: city,
+        country: country,
+        date: date,
+        weatherState: weatherState,
+        minTemp: minTemp,
+        maxTemp: maxTemp,
+        currentTemp: currentTemp,
+        allDays: allDays.map((day) => day.toDomain()).toList(growable: false),
+      );
 }
