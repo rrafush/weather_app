@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:weather_app/data/model/weather_response.dart';
 
-class WeatherApiClient {
+class WeatherService {
   static const baseUrl = 'https://www.metaweather.com/api';
 
   Future<int> getLocationId(String city) async {
