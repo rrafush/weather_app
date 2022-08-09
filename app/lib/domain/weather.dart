@@ -8,7 +8,7 @@ class Weather {
   final double minTemp;
   final double maxTemp;
   final double currentTemp;
-  final List<NextDays> alldays;
+  final List<NextDays> allDays;
 
   const Weather({
     required this.city,
@@ -18,6 +18,6 @@ class Weather {
     required this.minTemp,
     required this.maxTemp,
     required this.currentTemp,
-    required this.alldays,
+    required this.allDays,
   });
 }

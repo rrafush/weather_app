@@ -1,70 +1,47 @@
 import 'package:mobx/mobx.dart';
-import 'package:weather_app/data/model/weather_response.dart';
-import 'package:weather_app/data/weather_service.dart';
+import 'package:weather_app/data/weather_repository.dart';
 import 'package:weather_app/domain/weather.dart';
+import 'package:weather_app/presentation/weather_page/weather_page_ui_model.dart';
 
 part 'search_controller.g.dart';
 
 class SearchController = _SearchController with _$SearchController;
 
 abstract class _SearchController with Store {
-  WeatherApiClient apiClient = WeatherApiClient();
+  WeatherRepository _repository = WeatherRepository();
 
   @observable
-  WeatherResponse? response;
+  String? errorFeedback;
 
   @observable
-  String? error;
+  WeatherPageUIModel uiModel = WeatherPageUIModel(null);
 
   @observable
-  String? cityFormatted;
-
-  @observable
-  String? currentTempFormatted;
-
-  @observable
-  String? maxTempFormatted;
-
-  @observable
-  String? minTempFormatted;
-
-  @observable
-  bool isSearching = false;
+  bool isLoading = false;
 
   @observable
   String? imageAsset;
 
   @action
-  Future<WeatherResponse> getWeather(String city) async {
-    isSearching = true;
-    error = null;
+  Future<Weather> getWeather(String city) async {
+    isLoading = true;
+    errorFeedback = null;
     try {
-      final locationId = await apiClient.getLocationId(city);
-      final weather = await apiClient.fetchWeather(locationId);
-      response = weather;
+      final weather = await _repository.fetchWeather(city);
+      uiModel = WeatherPageUIModel(weather);
       imageAsset = getAsset(weather);
-
-      isSearching = false;
-      error = null;
+      isLoading = false;
+      errorFeedback = null;
       return weather;
     } catch (e) {
-      error = e.toString();
-      response = null;
-      isSearching = false;
+      errorFeedback = e.toString();
+      isLoading = false;
       throw e;
     }
   }
 
   @action
-  void formatStrings(Weather weather) {
-    cityFormatted = weather.city.replaceAll('£', '');
-    currentTempFormatted = weather.currentTemp.toStringAsFixed(0);
-    minTempFormatted = weather.minTemp.toStringAsFixed(0);
-    maxTempFormatted = weather.maxTemp.toStringAsFixed(0);
-  }
-
-  @action
-  String getAsset(WeatherResponse weather) {
+  String getAsset(Weather weather) {
     final String asset;
 
     switch (weather.weatherState) {
@@ -106,7 +83,7 @@ abstract class _SearchController with Store {
 
   @action
   void clearSearch() {
-    error = null;
-    response = null;
+    errorFeedback = null;
+    uiModel = WeatherPageUIModel(null);
   }
 }
