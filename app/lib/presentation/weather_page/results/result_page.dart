@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/data/model/next_days_response.dart';
+import 'package:weather_app/domain/next_days.dart';
 import 'package:weather_app/presentation/theme/app_colors.dart';
 
 class ResultPage extends StatelessWidget {
@@ -23,7 +23,7 @@ class ResultPage extends StatelessWidget {
   final String minTemp;
   final String weatherState;
   final String imageAsset;
-  final List<NextDaysResponse> week;
+  final List<NextDays> week;
   final VoidCallback onClear;
 
   @override

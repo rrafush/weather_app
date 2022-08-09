@@ -98,11 +98,11 @@ class _SearchPageState extends State<SearchPage> {
                 ),
                 AnimatedSwitcher(
                   duration: Duration(milliseconds: 300),
-                  child: controller.response == null &&
-                          !controller.isSearching &&
-                          controller.error == null
+                  child: controller.uiModel.hasContent &&
+                          !controller.isLoading &&
+                          controller.errorFeedback == null
                       ? SearchHome()
-                      : controller.isSearching
+                      : controller.isLoading
                           ? Container(
                               height: MediaQuery.of(context).size.height - 150,
                               width: MediaQuery.of(context).size.width,
@@ -118,24 +118,24 @@ class _SearchPageState extends State<SearchPage> {
                                 ],
                               ),
                             )
-                          : controller.response != null
+                          : controller.uiModel.hasContent
                               ? ResultPage(
-                                  city: controller.cityFormatted!,
-                                  country: controller.response!.country,
-                                  currentTemp: controller.currentTempFormatted!,
-                                  maxTemp: controller.maxTempFormatted!,
-                                  minTemp: controller.minTempFormatted!,
+                                  city: controller.uiModel.city,
+                                  country: controller.uiModel.country,
+                                  currentTemp: controller.uiModel.currentTemp,
+                                  maxTemp: controller.uiModel.maxTemp,
+                                  minTemp: controller.uiModel.minTemp,
                                   weatherState:
-                                      controller.response!.weatherState,
+                                      controller.uiModel.weatherState,
                                   imageAsset: controller.imageAsset!,
-                                  week: controller.response!.allDays,
+                                  week: controller.uiModel.allDays,
                                   onClear: () {
                                     textController.clear();
                                     controller.clearSearch();
                                   },
                                 )
-                              : controller.error != null
-                                  ? ErrorPage(error: controller.error!)
+                              : controller.errorFeedback != null
+                                  ? ErrorPage(error: controller.errorFeedback!)
                                   : SizedBox(),
                 ),
               ],
